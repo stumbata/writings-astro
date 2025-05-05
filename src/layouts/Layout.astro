@@ -1,6 +1,7 @@
 ---
 import '@/styles/global.css'
 import { Font } from 'astro:assets';
+import { ClientRouter } from 'astro:transitions';
 ---
 
 <!doctype html>
@@ -14,6 +15,7 @@ import { Font } from 'astro:assets';
 		<Font cssVariable='--font-lora' preload />
 	</head>
 	<body class="dark:bg-gray-800 dark:text-gray-50">
+		<ClientRouter />
 		<div class="container max-w-xl mx-auto px-6">
 			<slot />
 		</div>
