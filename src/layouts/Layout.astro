@@ -1,31 +1,30 @@
 ---
-import '@/styles/global.css'
-import { Font } from 'astro:assets';
-import { ClientRouter } from 'astro:transitions';
+import "@/styles/global.css";
+import { Font } from "astro:assets";
+import { ClientRouter } from "astro:transitions";
 ---
 
 <!doctype html>
 <html lang="en" class="text-lg font-normal">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{Astro.props.title}</title>
-		<Font cssVariable='--font-lora' preload />
-	</head>
-	<body class="dark:bg-gray-800 dark:text-gray-50">
-		<ClientRouter />
-		<div class="container max-w-xl mx-auto px-6">
-			<slot />
-		</div>
-	</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{Astro.props.title}</title>
+        <Font cssVariable="--font-lora" preload />
+    </head>
+    <body class="dark:bg-gray-800 dark:text-gray-50">
+        <ClientRouter />
+        <div class="container mx-auto max-w-xl px-6">
+            <slot />
+        </div>
+    </body>
 </html>
 
 <style>
-	html {
-		font-family: var(--font-lora);
-		color: hsla(0,0%,0%,0.73);
-	}
-
+    html {
+        font-family: var(--font-lora);
+        color: hsla(0, 0%, 0%, 0.73);
+    }
 </style>
