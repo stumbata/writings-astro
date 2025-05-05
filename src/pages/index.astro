@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { formatDate } from '../helper';
 
 import { getCollection } from 'astro:content';
 
@@ -7,13 +8,7 @@ const writings = await getCollection('writings');
 
 writings.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
-const formatDate = (date: Date) => {
-    const months = [
-        'януари', 'февруари', 'март', 'април', 'май', 'юни',
-        'юли', 'август', 'септември', 'октомври', 'ноември', 'декември'
-    ];
-    return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
-};
+
 ---
 
 <Layout>
@@ -29,7 +24,7 @@ const formatDate = (date: Date) => {
 
 		{writings.map((writing) => (
 			<div class="mb-8" >
-				<a class="underline text-blue-800 dark:text-blue-500 underline-offset-4 decoration-1 hover:decoration-transparent text-2xl font-sans ">{writing.data.title}</a>
+				<a href={writing.id} class="underline text-blue-800 dark:text-blue-500 underline-offset-4 decoration-1 hover:decoration-transparent text-2xl font-sans ">{writing.data.title}</a>
 				<div class="mt-1 text-sm">{formatDate(writing.data.date)}</div>
            	 	<div>{writing.data.description }</div>
 			</div>

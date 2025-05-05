@@ -1,0 +1,36 @@
+---
+import { getEntry, getCollection, render } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import { formatDate } from '../helper';
+
+export async function getStaticPaths() {
+    const writings = await getCollection('writings');
+    return writings.map((writing) => ({
+        params: { id: writing.id },
+        props: { writing },
+    }));
+}
+
+const { id } = Astro.params;
+const entry = await getEntry('writings', id);
+
+if (!entry) {
+  throw new Error('Could not find blog post ' + id);
+}
+const { Content} = await render(entry);
+---
+
+<Layout>
+    <a
+      href="/"
+      class="underline text-3xl decoration-1 underline-offset-4 inline-block my-5"
+      >Драсканици</a
+    >
+    <article>
+        <h1 class="m-0 mt-2 text-5xl">{entry.data.title}</h1>
+        <p class="m-1">{formatDate(entry.data.date)}</p>
+        <div class="prose-lg my-4">
+            <Content  />
+        </div>
+    </article>
+</Layout>
