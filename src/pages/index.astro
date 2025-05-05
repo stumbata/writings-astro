@@ -4,14 +4,39 @@ import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
 const writings = await getCollection('writings');
+
+writings.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const formatDate = (date: Date) => {
+    const months = [
+        'януари', 'февруари', 'март', 'април', 'май', 'юни',
+        'юли', 'август', 'септември', 'октомври', 'ноември', 'декември'
+    ];
+    return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+};
 ---
 
 <Layout>
-	<h1>Writings</h1>
-	<ul>
+  <div>
+        <div class="flex justify-between items-center">
+            <h1 class="text-4xl sm:text-6xl my-10">Драсканици</h1>
+        </div>
+
+        <div class="flex pb-14 items-top gap-3">
+            <img class="h-14 w-14 rounded-full" src="/profile1.jpg" alt="profile pic"/>
+            <div class="pt-1">Писани от <span class="font-bold">Станислав Огнянов</span></div>
+        </div>
+
 		{writings.map((writing) => (
-			<li>{writing.data.title}</li>
+			<div class="mb-8" >
+				<a class="underline text-blue-800 dark:text-blue-500 underline-offset-4 decoration-1 hover:decoration-transparent text-2xl font-sans ">{writing.data.title}</a>
+				<div class="mt-1 text-sm">{formatDate(writing.data.date)}</div>
+           	 	<div>{writing.data.description }</div>
+			</div>
 		))}
-	</ul>
+
+    </div>
+
+
 </Layout>
 
