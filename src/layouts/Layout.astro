@@ -11,6 +11,7 @@ import { ClientRouter } from "astro:transitions";
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
+        <meta name="description" content={Astro.props.description} />
         <title>{Astro.props.title}</title>
         <Font cssVariable="--font-lora" preload />
     </head>

@@ -9,7 +9,10 @@ const writings = await getCollection("writings");
 writings.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
-<Layout>
+<Layout
+    title="Драсканици"
+    description="Кратки разкази и стихове, писани от Станислав Огнянов"
+>
     <div>
         <div class="flex items-center justify-between">
             <h1 class="my-10 text-4xl sm:text-6xl">Драсканици</h1>
