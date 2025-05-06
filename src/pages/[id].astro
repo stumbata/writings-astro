@@ -3,6 +3,7 @@ import { getEntry, getCollection, render } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import { formatDate } from "../helper";
 import ThemeIcon from "@/components/ThemeIcon.astro";
+
 export async function getStaticPaths() {
     const writings = await getCollection("writings");
     return writings.map((writing) => ({
@@ -37,4 +38,36 @@ const { Content } = await render(entry);
             <Content />
         </div>
     </article>
+
+    {
+        (async () => {
+            const writings = await getCollection("writings");
+            writings.sort(
+                (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+            );
+            const currentIndex = writings.findIndex((w) => w.id === id);
+            const prev = writings[currentIndex + 1];
+            const next = writings[currentIndex - 1];
+            return (
+                <div class="my-16 flex justify-between">
+                    {prev && (
+                        <a
+                            href={`/${prev.id}`}
+                            class="text-blue-800 underline decoration-1 underline-offset-4 hover:decoration-transparent dark:text-blue-500"
+                        >
+                            ← {prev.data.title}
+                        </a>
+                    )}
+                    {next && (
+                        <a
+                            href={`/${next.id}`}
+                            class="text-blue-800 underline decoration-1 underline-offset-4 hover:decoration-transparent dark:text-blue-500"
+                        >
+                            {next.data.title} →
+                        </a>
+                    )}
+                </div>
+            );
+        })()
+    }
 </Layout>
